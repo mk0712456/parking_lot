@@ -34,19 +34,20 @@ public class TicketServiceImpl implements TicketService{
     @Override
     public Ticket genrateTicket(int gate_id, String vechicle_no, String vechicle_type) throws Exception {
          /*
-        1. Using gate id, get the g  ate object
-        2. Do a createIfNotExists on the vehicle object
+        1. Using gate id, get the g ate object
+        2. Do a createIfNotExists on the vehicle object in repo
         3. Using strategy pattern, figure out an empty spot or throw an error
         4. create a ticket object and store it in db
          */
         Gate gate = gateService.getGateById(gate_id);
+        //to convert string to vechicle type as enum
         VechicleType type = VechicleType.get_type_from_string(vechicle_type);
-        Vechicle vechicle = vechicleRepository. create_if_not_present(vechicle_no, type);
-        ParkingLot parkingLotbyGateId = parkingLotRepository.getParkingLot(gate_id);
-        if(parkingLotbyGateId == null){
+        Vechicle vechicle = vechicleRepository.create_if_not_present(vechicle_no, type);
+        ParkingLot parkingLot = parkingLotRepository.getParkingLot(gate_id);
+        if(parkingLot == null){
             throw new Exception("Invalid Gate Id");
         }
-        Spot spot = assignSpotStrategy.assignSpot(type, parkingLotbyGateId);
+        Spot spot = assignSpotStrategy.assignSpot(type, parkingLot);
         Ticket ticket = new Ticket();
         ticket.setGate(gate);
         ticket.setVechicle(vechicle);

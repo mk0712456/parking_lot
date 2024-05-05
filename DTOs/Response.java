@@ -1,22 +1,23 @@
 package DTOs;
 
 public class Response {
-    private RequestStatus requestStatus;
-    private String error;
+    private ResponseStatus status;
+    private String Error;
 
-    public RequestStatus getRequestStatus() {
-        return requestStatus;
-    }
-
-    public void setRequestStatus(RequestStatus requestStatus) {
-        this.requestStatus = requestStatus;
-    }
 
     public String getError() {
-        return error;
+        return Error;
     }
 
     public void setError(String error) {
-        this.error = error;
+        Error = error;
+    }
+
+    public ResponseStatus getStatus() {
+        return status;
+    }
+
+    public void setResponseStatus(ResponseStatus status) {
+        this.status = status;
     }
 }
