@@ -18,7 +18,7 @@ import static javax.swing.UIManager.put;
 
 public class parkingLotRunner {
     public static void main(String[] args) {
-        //gate_repo and parkinglot_repo should not be null initially
+        //gate_repo and parkinglot_repo should not be null initially asjdbhjadbjh
         Gate gate1 = new Gate();
         gate1.setGateType(GateType.ENTRY);
         gate1.setId(1);
