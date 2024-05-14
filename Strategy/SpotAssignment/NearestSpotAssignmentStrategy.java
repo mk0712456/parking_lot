@@ -10,7 +10,7 @@ public class NearestSpotAssignmentStrategy implements AssignSpotStrategy {
             if(floor.getFloorStatus().equals(FloorStatus.OPERATIONAL)){
                 for(Section section : floor.getSections()){
                     for(Spot spot : section.getSpots()){
-                        if(spot.getSpotStatus().equals(SpotStatus.UNOCCUPIED)){
+                        if( spot.getVechicleType().equals(vechicleType) && spot.getSpotStatus().equals(SpotStatus.UNOCCUPIED)){
                             spot.setSpotStatus(SpotStatus.OCCUPIED);
                             return spot;
                         }

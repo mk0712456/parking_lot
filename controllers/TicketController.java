@@ -1,8 +1,8 @@
 package controllers;
 
 
-import DTOs.RequestStatus;
 import DTOs.Response;
+import DTOs.ResponseStatus;
 import DTOs.generateTicketRequestDTO;
 import DTOs.generateTicketResponseDTO;
 import Service.TicketService;
@@ -19,6 +19,7 @@ public class TicketController {
     public generateTicketResponseDTO generateTicket(generateTicketRequestDTO requestDTO){
         //handling response and generateTicketResponse seperaely to displY specific errors to users
         generateTicketResponseDTO responseDTO = new generateTicketResponseDTO();
+
         try {
             if (requestDTO.getGate_id() < 0) {
                 throw new InvalidRequestException("Invalid Gate ID");
@@ -29,7 +30,7 @@ public class TicketController {
         }
         catch (InvalidRequestException e){
             Response response = new Response();
-            response.setRequestStatus(RequestStatus.FAIL);
+            response.setResponseStatus(ResponseStatus.FAIL);
             response.setError(e.getMessage());
             responseDTO.setResponse(response);
             return responseDTO;
@@ -40,11 +41,11 @@ public class TicketController {
         try{
             Ticket ticket = ticketService.genrateTicket(requestDTO.getGate_id(), requestDTO.getVechicle_no(), requestDTO.getVechicle_type());
             responseDTO.setTicket(ticket);
-            response.setRequestStatus(RequestStatus.SUCCESS);
+            response.setResponseStatus(ResponseStatus.SUCCESS);
 
         }
         catch (Exception e){
-           response.setRequestStatus(RequestStatus.FAIL);
+           response.setResponseStatus(ResponseStatus.FAIL);
            response.setError(e.getMessage());
         }
         responseDTO.setResponse(response);
